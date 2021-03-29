@@ -1,0 +1,5 @@
+apiversion: v1
+description: DruidDescription
+name: druidsystem
+type: application
+version: 1.0.0

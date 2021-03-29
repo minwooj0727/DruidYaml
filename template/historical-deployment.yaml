@@ -1,0 +1,94 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  annotations:
+    kompose.cmd: kompose convert
+    kompose.version: 1.22.0 (955b78124)
+  creationTimestamp: null
+  labels:
+    io.kompose.service: historical
+  name: historical
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      io.kompose.service: historical
+  strategy:
+    type: Recreate
+  template:
+    metadata:
+      annotations:
+        kompose.cmd: kompose convert
+        kompose.version: 1.22.0 (955b78124)
+      creationTimestamp: null
+      labels:
+        io.kompose.service: historical
+    spec:
+      containers:
+        - args:
+            - historical
+          env:
+            - name: DRUID_LOG4J
+              value: <?xml version="1.0" encoding="UTF-8" ?><Configuration status="WARN"><Appenders><Console name="Console" target="SYSTEM_OUT"><PatternLayout pattern="%d{ISO8601} %p [%t] %c - %m%n"/></Console></Appenders><Loggers><Root level="info"><AppenderRef ref="Console"/></Root><Logger name="org.apache.druid.jetty.RequestLog" additivity="false" level="DEBUG"><AppenderRef ref="Console"/></Logger></Loggers></Configuration>
+            - name: DRUID_MAXDIRECTMEMORYSIZE
+              value: 6172m
+            - name: DRUID_MAXNEWSIZE
+              value: 250m
+            - name: DRUID_NEWSIZE
+              value: 250m
+            - name: DRUID_XMS
+              value: 1g
+            - name: DRUID_XMX
+              value: 1g
+            - name: druid_coordinator_balancer_strategy
+              value: cachingCost
+            - name: druid_emitter_logging_logLevel
+              value: debug
+            - name: druid_extensions_loadList
+              value: '["druid-histogram", "druid-datasketches", "druid-lookups-cached-global", "postgresql-metadata-storage","druid-kafka-indexing-service","druid-kinesis-indexing-service","druid-s3-extensions","druid-azure-extensions","druid-google-extensions","druid-hdfs-storage"]'
+            - name: druid_indexer_fork_property_druid_processing_buffer_sizeBytes
+              value: "268435456"
+            - name: druid_indexer_logs_directory
+              value: /opt/data/indexing-logs
+            - name: druid_indexer_logs_type
+              value: file
+            - name: druid_indexer_runner_javaOptsArray
+              value: '["-server", "-Xmx1g", "-Xms1g", "-XX:MaxDirectMemorySize=3g", "-Duser.timezone=UTC", "-Dfile.encoding=UTF-8", "-Djava.util.logging.manager=org.apache.logging.log4j.jul.LogManager"]'
+            - name: druid_metadata_storage_connector_connectURI
+              value: jdbc:postgresql://postgres:5432/druid
+            - name: druid_metadata_storage_connector_password
+              value: FoolishPassword
+            - name: druid_metadata_storage_connector_user
+              value: druid
+            - name: druid_metadata_storage_host
+            - name: druid_metadata_storage_type
+              value: postgresql
+            - name: druid_processing_numMergeBuffers
+              value: "2"
+            - name: druid_processing_numThreads
+              value: "2"
+            - name: druid_storage_storageDirectory
+              value: /opt/data/segments
+            - name: druid_storage_type
+              value: local
+            - name: druid_zk_service_host
+              value: zookeeper
+          image: apache/druid:0.20.1
+          name: historical
+          ports:
+            - containerPort: 8083
+          resources: {}
+          volumeMounts:
+            - mountPath: /opt/data
+              name: historical-claim0
+            - mountPath: /opt/druid/var
+              name: docker-historical-var
+      restartPolicy: Always
+      volumes:
+        - name: historical-claim0
+          persistentVolumeClaim:
+            claimName: historical-claim0
+        - name: docker-historical-var
+          persistentVolumeClaim:
+            claimName: docker-historical-var
+status: {}
