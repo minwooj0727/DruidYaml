@@ -74,6 +74,8 @@ spec:
             - name: druid_zk_service_host
               value: zookeeper
           image: apache/druid:0.20.1
+          securityContext:
+           privileged: true
           name: broker
           ports:
             - containerPort: 8082
