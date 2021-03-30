@@ -33,4 +33,6 @@ spec:
             - containerPort: 2181
           resources: {}
       restartPolicy: Always
+      nodeSelector:
+        kubernetes.io/hostname: analysis1
 status: {}

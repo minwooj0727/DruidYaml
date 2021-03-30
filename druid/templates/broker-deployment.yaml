@@ -86,4 +86,6 @@ spec:
         - name: docker-broker-var
           persistentVolumeClaim:
             claimName: docker-broker-var
+      nodeSelector:
+        kubernetes.io/hostname: analysis1
 status: {}

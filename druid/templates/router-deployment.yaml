@@ -86,4 +86,6 @@ spec:
         - name: docker-router-var
           persistentVolumeClaim:
             claimName: docker-router-var
+      nodeSelector:
+        kubernetes.io/hostname: analysis1
 status: {}

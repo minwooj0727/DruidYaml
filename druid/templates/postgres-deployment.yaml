@@ -43,4 +43,6 @@ spec:
         - name: docker-metadata-data
           persistentVolumeClaim:
             claimName: docker-metadata-data
+      nodeSelector:
+        kubernetes.io/hostname: analysis1
 status: {}

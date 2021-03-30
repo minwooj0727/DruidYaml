@@ -97,4 +97,6 @@ spec:
         - name: docker-middle-var
           persistentVolumeClaim:
             claimName: docker-middle-var
+      nodeSelector:
+        kubernetes.io/hostname: analysis1
 status: {}

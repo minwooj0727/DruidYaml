@@ -91,4 +91,6 @@ spec:
         - name: docker-coordinator-var
           persistentVolumeClaim:
             claimName: docker-coordinator-var
+      nodeSelector:
+        kubernetes.io/hostname: analysis1
 status: {}
