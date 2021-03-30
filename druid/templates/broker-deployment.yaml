@@ -37,9 +37,9 @@ spec:
             - name: DRUID_NEWSIZE
               value: 250m
             - name: DRUID_XMS
-              value: 1g
+              value: 8g
             - name: DRUID_XMX
-              value: 1g
+              value: 8g
             - name: druid_coordinator_balancer_strategy
               value: cachingCost
             - name: druid_emitter_logging_logLevel
