@@ -33,6 +33,8 @@ spec:
             - name: POSTGRES_USER
               value: druid
           image: postgres:latest
+          securityContext:
+           privileged: true
           name: postgres-druid
           resources: {}
           volumeMounts:
