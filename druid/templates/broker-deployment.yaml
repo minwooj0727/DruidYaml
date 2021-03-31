@@ -74,7 +74,7 @@ spec:
             - name: druid_storage_type
               value: local
             - name: druid_zk_service_host
-              value: zookeeper
+              value: dn3.jts.default.svc.cluster.local:2181,dn1.jts.default.svc.cluster.local:2181,dn2.jts.default.svc.cluster.local:2181
           image: apache/druid:0.20.1
           securityContext:
            privileged: true
