@@ -15,5 +15,6 @@ spec:
       targetPort: 8888
   selector:
     io.kompose.service: router
+  type: NodePort
 status:
   loadBalancer: {}
