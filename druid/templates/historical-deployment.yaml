@@ -13,6 +13,7 @@ spec:
   selector:
     matchLabels:
       io.kompose.service: historical
+      type: ambari
   strategy:
     type: Recreate
   template:
@@ -23,6 +24,7 @@ spec:
       creationTimestamp: null
       labels:
         io.kompose.service: historical
+        type: ambari
     spec:
       containers:
         - args:
