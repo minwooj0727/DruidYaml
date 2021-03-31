@@ -72,7 +72,7 @@ spec:
             - name: druid_storage_type
               value: local
             - name: druid_zk_service_host
-              value: dn1
+              value: zookeeper
           image: apache/druid:0.20.1
           securityContext:
            privileged: true
