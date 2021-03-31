@@ -7,12 +7,14 @@ metadata:
   creationTimestamp: null
   labels:
     io.kompose.service: middlemanager
+    type: ambari
   name: middlemanager
 spec:
   replicas: 1
   selector:
     matchLabels:
       io.kompose.service: middlemanager
+      type: ambari
   strategy:
     type: Recreate
   template:
@@ -23,6 +25,7 @@ spec:
       creationTimestamp: null
       labels:
         io.kompose.service: middlemanager
+        type: ambari
     spec:
       containers:
         - args:

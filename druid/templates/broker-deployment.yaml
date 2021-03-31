@@ -7,12 +7,14 @@ metadata:
   creationTimestamp: null
   labels:
     io.kompose.service: broker
+    type: ambari
   name: broker
 spec:
   replicas: 1
   selector:
     matchLabels:
       io.kompose.service: broker
+      type: ambari
   strategy:
     type: Recreate
   template:
@@ -23,6 +25,7 @@ spec:
       creationTimestamp: null
       labels:
         io.kompose.service: broker
+        type: ambari
     spec:
       containers:
         - args:
@@ -72,7 +75,7 @@ spec:
             - name: druid_storage_type
               value: local
             - name: druid_zk_service_host
-              value: zookeeper
+              value: dn1
           image: apache/druid:0.20.1
           securityContext:
            privileged: true
